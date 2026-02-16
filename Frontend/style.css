@@ -1,0 +1,135 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: inline-block;
+  margin-top: 12px;
+  max-width: 720px;
+  width: 100%;
+}
+
+/* Botões padronizados */
+.btn-concluir, .btn-login, .btn-reset, .btn-quiz {
+  background-color: #2b7cff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-concluir:hover, .btn-login:hover, .btn-reset:hover, .btn-quiz:hover {
+  background-color: #1a5fd6;
+}
+
+#mensagem p {
+  margin: 8px 0;
+}
+
+/* Feedback visual */
+.sucesso {
+  color: green;
+  font-weight: bold;
+  background: #e6ffe6;
+  padding: 4px;
+  border-radius: 4px;
+}
+.erro {
+  color: red;
+  font-weight: bold;
+  background: #ffe6e6;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+/* Quiz */
+.pergunta {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.quiz-form label {
+  margin: 6px 0;
+  cursor: pointer;
+}
+.quiz-form input[type="radio"] {
+  margin-right: 6px;
+}
+#resultado {
+  margin-top: 20px;
+  font-size: 1.1em;
+}
+
+/* Progress bar */
+.progress-bar {
+  background: #e6e6e6;
+  border-radius: 999px;
+  height: 14px;
+  width: 100%;
+  margin: 8px 0 12px 0;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #2b7cff, #1a9cff);
+  height: 100%;
+  width: 0%;
+  transition: width 600ms ease;
+}
+
+/* Medalha */
+.medalha {
+  display: inline-block;
+  font-size: 28px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Foco visível */
+button:focus, nav a:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  nav a {
+    display: block;
+    margin: 8px 0;
+  }
+  main {
+    padding: 10px;
+  }
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+}

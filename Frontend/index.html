@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Educação Financeira</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html">Início</a>
+  <a href="login.html">Login</a>
+  <a href="conteudos.html">Conteúdos</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="progresso.html">Progresso</a>
+</nav>
+
+<main>
+  <section>
+    <h1 id="tituloPrincipal">Bem-vindo à Plataforma de Educação Financeira</h1>
+    <p id="subtitulo">Aprenda a organizar suas finanças, investir e acompanhar seu progresso.</p>
+
+    <div id="boasVindas" class="card" style="display:none;">
+      <p><strong>Olá,</strong> <span id="usuarioEmail"></span></p>
+
+      <div id="resumoWrapper">
+        <p id="resumoProgresso"></p>
+
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="progressFill" class="progress-fill" style="width:0%"></div>
+        </div>
+
+        <div id="medalha" class="medalha" title="Meta de pontos atingida" style="display:none">
+          🏅
+        </div>
+      </div>
+
+      <button id="logoutBtn" class="btn-logout" aria-label="Sair da conta">Sair</button>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
+

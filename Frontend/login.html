@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html">Início</a>
+  <a href="login.html">Login</a>
+  <a href="conteudos.html">Conteúdos</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="progresso.html">Progresso</a>
+</nav>
+
+<main>
+  <section>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" required autocomplete="username"><br><br>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" required autocomplete="current-password"><br><br>
+
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+    <div id="mensagem" aria-live="polite"></div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
