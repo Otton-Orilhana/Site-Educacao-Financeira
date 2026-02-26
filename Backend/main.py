@@ -1,0 +1,62 @@
+# main.py
+from fastapi import FastAPI, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+from database import engine, Base, get_db
+import models, schemas, crud, auth
+from auth import get_password_hash, verify_password, create_access_token
+from fastapi.middleware.cors import CORSMiddleware
+
+# criar tabelas (dev). Em produção use migrations Alembic.
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(title="Educação Financeira API")
+
+# Ajuste CORS para seu frontend (ex.: Live Server porta 5500)
+origins = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.post("/api/auth/register", response_model=schemas.UserOut)
+def register(payload: schemas.UserCreate, db: Session = Depends(get_db)):
+    if crud.get_user_by_email(db, payload.email):
+        raise HTTPException(status_code=400, detail="Email já cadastrado")
+    hashed = get_password_hash(payload.password)
+    user = crud.create_user(db, payload.email, hashed, payload.name)
+    return user
+
+@app.post("/api/auth/login", response_model=schemas.Token)
+def login(payload: schemas.UserCreate, db: Session = Depends(get_db)):
+    user = crud.get_user_by_email(db, payload.email)
+    if not user or not verify_password(payload.password, user.password_hash):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Credenciais inválidas")
+    token = create_access_token(user.id)
+    return {"access_token": token, "token_type": "bearer"}
+
+@app.get("/api/contents", response_model=list[schemas.ContentOut])
+def list_contents(db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
+    return crud.get_contents(db)
+
+@app.post("/api/progress", response_model=schemas.ProgressOut)
+def post_progress(payload: schemas.ProgressIn, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
+    progress = crud.add_progress(db, current_user.id, payload.content_id, payload.status)
+    return progress
+
+@app.get("/api/progress", response_model=list[schemas.ProgressOut])
+def get_progress(db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
+    return crud.get_progress_by_user(db, current_user.id)
+
+@app.post("/api/quiz/submit")
+def submit_quiz(payload: schemas.QuizSubmitIn, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
+    answers = [{"quiz_id": item.quiz_id, "selected_option": item.selected_option} for item in payload.answers]
+    result = crud.submit_quiz_answers(db, current_user.id, answers)
+    return result
