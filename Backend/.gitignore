@@ -22,3 +22,6 @@ contents*.json
 *.egg-info/
 
 dev.db
+
+save_state.ps1
+restart_dev.ps1
