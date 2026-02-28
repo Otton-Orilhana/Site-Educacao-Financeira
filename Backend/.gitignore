@@ -1,0 +1,22 @@
+﻿# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+
+# Editor / OS
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Backups and local outputs
+*.bak
+contents*.json
+
+# Bytecode and caches
+*.egg-info/
