@@ -20,3 +20,5 @@ contents*.json
 
 # Bytecode and caches
 *.egg-info/
+
+dev.db
